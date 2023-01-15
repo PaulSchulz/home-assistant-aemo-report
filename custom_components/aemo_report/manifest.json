@@ -1,0 +1,16 @@
+{
+  "domain": "aemo_report",
+  "name": "AEMO Report",
+  "integration_type": "hub",
+  "documentation": "https://github.com/PaulSchulz/home-assistant-aemo-report",
+  "issue_tracker": "https://github.com/PaulSchulz/home-assistant-aemo-report/issues",
+  "version": "0.1.0",
+  "requirements": [],
+  "ssdp": [],
+  "zeroconf": [],
+  "homekit": {},
+  "dependencies": [],
+  "codeowners": ["@PaulSchulz"],
+  "iot_class": "cloud_polling"
+  "config_flow": true,
+}
