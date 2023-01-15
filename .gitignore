@@ -2,3 +2,6 @@
 *~
 *#
 *.orig
+
+# python
+*__pycache__
