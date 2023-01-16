@@ -1,3 +1,0 @@
-type: entity
-entity: sensor.sa_local_power_status
-state_color: true

@@ -18,7 +18,7 @@ views:
         title: National Energy Market (AEMO)
         refresh_interval: 60
       - type: entity
-        entity: sensor.sa_local_power_status
+        entity: sensor.local_power_status
         state_color: true
       - type: entities
         entities:

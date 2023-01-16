@@ -129,8 +129,8 @@ template:
         icon: mdi:lightning-bolt-outline
         unit_of_measurement: "$/MWh"
 
-      - name: "SA Network Status"
-        unique_id: sa_network_status
+      - name: "Local Power Status"
+        unique_id: local_power_status
         state: >
           {% if state_attr('sensor.aemo_market_report_sa', 'PRICE')|float
           > states('sensor.sa_tarrif_feed_in')|float %}

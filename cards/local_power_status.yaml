@@ -1,0 +1,3 @@
+type: entity
+entity: sensor.local_power_status
+state_color: true
