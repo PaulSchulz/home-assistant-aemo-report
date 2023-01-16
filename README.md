@@ -1,4 +1,7 @@
 # AEMO Report
+
+  ![National Energy Network (AEMO)](images/national-energy-network.png)
+
 This Home Assistant Integration retrieves the National Energy Market (NEM)
 Reports from Australia
 
@@ -36,5 +39,5 @@ found in 'dashboards/', with individual cards defined in 'cards/'.
 On a Linux host, the AEMO JSON report can be downloaded with the following
 command (if you have wget and jq installed):
 
-  wget https://visualisations.aemo.com.au/aemo/apps/api/report/ELEC_NEM_SUMMARY -O - \
-    | jq
+    wget https://visualisations.aemo.com.au/aemo/apps/api/report/ELEC_NEM_SUMMARY -O - \
+      | jq
