@@ -1,6 +1,6 @@
 # AEMO Report
 
-<img src="./images/national-energy-network.png?raw=true">
+<img src="national-energy-network.png">
 
 This Home Assistant Integration retrieves the National Energy Market (NEM)
 Reports from Australia
