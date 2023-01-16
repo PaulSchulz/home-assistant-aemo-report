@@ -1,0 +1,14 @@
+title: National Energy Market (AEMO)
+type: history-graph
+entities:
+  - entity: sensor.aemo_market_report_nsw
+    name: NSW
+  - entity: sensor.aemo_market_report_qld
+    name: QLD
+  - entity: sensor.aemo_market_report_vic
+    name: VIC
+  - entity: sensor.aemo_market_report_sa
+    name: SA
+  - entity: sensor.aemo_market_report_tas
+    name: TAS
+refresh_interval: 60

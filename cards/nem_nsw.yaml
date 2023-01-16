@@ -1,0 +1,6 @@
+title: NEM NSW
+type: history-graph
+entities:
+  - entity: sensor.nem_nsw_price
+  - entity: sensor.nem_nsw_demand
+  - entity: sensor.nem_nsw_import

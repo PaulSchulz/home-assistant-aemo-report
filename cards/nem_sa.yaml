@@ -1,0 +1,8 @@
+title: NEM SA
+type: history-graph
+entities:
+  - entity: sensor.nem_sa_price
+  - entity: sensor.nem_sa_demand
+  - entity: sensor.nem_sa_import
+  - entity: sensor.sa_tarrif
+  - entity: sensor.sa_tarrif_feed_in

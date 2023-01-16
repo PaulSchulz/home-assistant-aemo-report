@@ -1,0 +1,8 @@
+title: NEM Markets
+type: entities
+entities:
+  - sensor.aemo_market_report_nsw
+  - sensor.aemo_market_report_qld
+  - sensor.aemo_market_report_sa
+  - sensor.aemo_market_report_tas
+  - sensor.aemo_market_report_vic

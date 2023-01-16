@@ -1,0 +1,44 @@
+title: AEMO Report
+views:
+  - path: default_view
+    title: Home
+    cards:
+      - type: history-graph
+        entities:
+          - entity: sensor.aemo_market_report_nsw
+            name: NSW
+          - entity: sensor.aemo_market_report_qld
+            name: QLD
+          - entity: sensor.aemo_market_report_vic
+            name: VIC
+          - entity: sensor.aemo_market_report_sa
+            name: SA
+          - entity: sensor.aemo_market_report_tas
+            name: TAS
+        title: National Energy Market (AEMO)
+        refresh_interval: 60
+      - type: entity
+        entity: sensor.sa_local_power_status
+        state_color: true
+      - type: entities
+        entities:
+          - sensor.aemo_market_report_nsw
+          - sensor.aemo_market_report_qld
+          - sensor.aemo_market_report_sa
+          - sensor.aemo_market_report_tas
+          - sensor.aemo_market_report_vic
+        title: NEM Markets
+      - type: history-graph
+        entities:
+          - entity: sensor.nem_sa_price
+          - entity: sensor.nem_sa_demand
+          - entity: sensor.nem_sa_import
+          - entity: sensor.sa_tarrif
+          - entity: sensor.sa_tarrif_feed_in
+        title: NEM SA
+      - type: history-graph
+        entities:
+          - entity: sensor.nem_nsw_price
+          - entity: sensor.nem_nsw_demand
+          - entity: sensor.nem_nsw_import
+        title: NEM NSW
