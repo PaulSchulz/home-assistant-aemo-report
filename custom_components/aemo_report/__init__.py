@@ -2,24 +2,38 @@
 The aemo_report integration.
 This component get the most recent AEMO Report for the Australian Electricity Grid
 """
-
-
 from __future__ import annotations
+
+import logging
+
+_LOGGER = logging.getLogger(__name__)
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
 
-#from .const import DOMAIN
-DOMAIN = "aemo_report"
+from .const import DOMAIN
 
 # List the platforms that you want to support.
 # For your initial PR, limit it to 1 platform.
-PLATFORMS: list[Platform] = [Platform.LIGHT]
+PLATFORMS: list[Platform] = [Platform.SENSOR]
+
+CONF_URL = "url"
+DEFAULT_URL = "https://visualisations.aemo.com.au/aemo/apps/api/report/ELEC_NEM_SUMMARY"
 
 async def async_setup(hass, config):
-    hass.states.async_set("aemo_report.status", "Loaded")
+    """Setup the AEMO Report component. """
+    # Get the URL from the configuration. Use DEFAULT_URL if none is provided
 
+    url = config[DOMAIN].get(CONF_URL, DEFAULT_URL)
+
+    hass.states.async_set("aemo_report.url", url)
+    hass.states.async_set("aemo_report.status", "loading")
+    hass.states.async_set("aemo_report.vic1_price", "70.8")
+    hass.states.async_set("aemo_report.nsw1_price", "34.2")
+
+    hass.states.async_set("aemo_report.status", "loaded")
+    _LOGGER.info("The 'AEMO Report' component is ready!")
     # Return boolean to indicate that initialization was successful.
     return True
 
