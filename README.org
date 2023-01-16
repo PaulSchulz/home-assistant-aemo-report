@@ -1,6 +1,6 @@
 #+TITLE: AEMO Report
 
-[[file:images/national-energy-network.png]]
+[[file:images/national-energy-market.png]]
 
 * Introduction
 
