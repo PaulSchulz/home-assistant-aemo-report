@@ -47,8 +47,8 @@ On a Linux host, the AEMO JSON report can be downloaded with the following
 command (if you have *wget* and *jq* installed):
 
 #+begin_src sh
-  wget https://visualisations.aemo.com.au/aemo/apps/api/report/ELEC_NEM_SUMMARY -O
-  - \ | jq
+  wget https://visualisations.aemo.com.au/aemo/apps/api/report/ELEC_NEM_SUMMARY -O - \
+    | jq
 #+end_src
 
 * Usage License
