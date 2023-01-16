@@ -1,0 +1,141 @@
+# AEMO Report
+# Author: Paul Schulz <paul@mawsonlakes.org>
+# Github: https://github.com/PaulSchulz/home-assistant-aemo-report
+
+# Put the following details in your 'configuration.yaml' to get your Home
+# Assistance installation to periodically poll and pull in the AEMO Report of
+# the Ausstralian Energy Network (NEM).
+
+# After downloading the 'json' file, splits up the summary information for each
+# state, and then creates additional sensor entities for the various attributes.
+
+rest:
+  - resource: https://visualisations.aemo.com.au/aemo/apps/api/report/ELEC_NEM_SUMMARY
+    scan_interval: 60
+    sensor:
+      - name: "AEMO Market Report NSW"
+        unique_id: aemo_report_nsw
+        icon: mdi:transmission-tower-export
+        json_attributes_path: "$.[0]"
+        json_attributes:
+          - REGIONID
+          - PRICE
+          - TOTALDEMAND
+          - NETINTERCHANGE
+          - SEMISCHEDULEDGENERATION
+          - SETTLEMENTDATE
+        value_template: "{{ value_json.ELEC_NEM_SUMMARY[0].PRICE }}"
+        unit_of_measurement: "$/MWh"
+
+      - name: "AEMO Market Report QLD"
+        unique_id: aemo_report_qld
+        icon: mdi:transmission-tower-export
+        json_attributes_path: "$.[1]"
+        json_attributes:
+          - REGIONID
+          - PRICE
+          - TOTALDEMAND
+          - NETINTERCHANGE
+          - SEMISCHEDULEDGENERATION
+          - SETTLEMENTDATE
+        value_template: "{{ value_json.ELEC_NEM_SUMMARY[1].PRICE }}"
+        unit_of_measurement: "$/MWh"
+
+      - name: "AEMO Market Report SA"
+        unique_id: aemo_report_sa
+        icon: mdi:transmission-tower-export
+        json_attributes_path: "$.[2]"
+        json_attributes:
+          - REGIONID
+          - PRICE
+          - TOTALDEMAND
+          - NETINTERCHANGE
+          - SEMISCHEDULEDGENERATION
+          - SETTLEMENTDATE
+        value_template: "{{ value_json.ELEC_NEM_SUMMARY[2].PRICE }}"
+        unit_of_measurement: "$/MWh"
+
+      - name: "AEMO Market Report TAS"
+        unique_id: aemo_report_tas
+        icon: mdi:transmission-tower-export
+        json_attributes_path: "$.[3]"
+        json_attributes:
+          - REGIONID
+          - PRICE
+          - TOTALDEMAND
+          - NETINTERCHANGE
+          - SEMISCHEDULEDGENERATION
+          - SETTLEMENTDATE
+        value_template: "{{ value_json.ELEC_NEM_SUMMARY[3].PRICE }}"
+        unit_of_measurement: "$/MWh"
+
+      - name: "AEMO Market Report VIC"
+        unique_id: aemo_report_vic
+        icon: mdi:transmission-tower-export
+        json_attributes_path: "$.[4]"
+        json_attributes:
+          - REGIONID
+          - PRICE
+          - TOTALDEMAND
+          - NETINTERCHANGE
+          - SEMISCHEDULEDGENERATION
+          - SETTLEMENTDATE
+        value_template: "{{ value_json.ELEC_NEM_SUMMARY[4].PRICE }}"
+        unit_of_measurement: "$/MWh"
+
+template:
+  - sensor:
+      - name: "NEM NSW Price"
+        state: "{{ '%+.1f'|format(state_attr('sensor.aemo_market_report_nsw', 'PRICE')) }}"
+        icon: mdi:lightning-bolt-outline
+        unit_of_measurement: "$/MWh"
+
+      - name: "NEM NSW Demand"
+        state: "{{ '%+.1f'|format(state_attr('sensor.aemo_market_report_nsw', 'TOTALDEMAND')) }}"
+        icon: mdi:home-lightning-bolt-outline
+        unit_of_measurement: "MW"
+
+      - name: "NEM NSW Import"
+        state: "{{ '%+.1f'|format(state_attr('sensor.aemo_market_report_nsw', 'NETINTERCHANGE')) }}"
+        icon: mdi:consolidate
+        unit_of_measurement: "MW"
+
+      - name: "NEM SA Price"
+        unique_id: nem_sa_price
+        state: "{{ '%+.1f'|format(state_attr('sensor.aemo_market_report_sa', 'PRICE')) }}"
+        icon: mdi:lightning-bolt-outline
+        unit_of_measurement: "$/MWh"
+
+      - name: "NEM SA Demand"
+        unique_id: nem_sa_demand
+        state: "{{ '%+.1f'|format(state_attr('sensor.aemo_market_report_sa', 'TOTALDEMAND')) }}"
+        icon: mdi:home-lightning-bolt-outline
+        unit_of_measurement: "MW"
+
+      - name: "NEM SA Import"
+        state: "{{ '%+.1f'|format(state_attr('sensor.aemo_market_report_sa', 'NETINTERCHANGE')) }}"
+        icon: mdi:consolidate
+        unit_of_measurement: "MW"
+
+      - name: "SA Tarrif"
+        unique_id: sa_tarrif
+        state: 250.0
+        icon: mdi:lightning-bolt-outline
+        unit_of_measurement: "$/MWh"
+
+      - name: "SA Tarrif Feed In"
+        unique_id: sa_tarrif_feed_in
+        state: 150.0
+        icon: mdi:lightning-bolt-outline
+        unit_of_measurement: "$/MWh"
+
+      - name: "SA Network Status"
+        unique_id: sa_network_status
+        state: >
+          {% if state_attr('sensor.aemo_market_report_sa', 'PRICE')|float
+          > states('sensor.sa_tarrif_feed_in')|float %}
+            export
+          {% else %}
+            import
+          {% endif %}
+        icon: mdi:home-lightning-bolt-outline
