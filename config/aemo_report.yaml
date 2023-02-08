@@ -83,23 +83,217 @@ rest:
         value_template: "{{ value_json.ELEC_NEM_SUMMARY[4].PRICE }}"
         unit_of_measurement: "$/MWh"
 
+  - resource: https://visualisations.aemo.com.au/aemo/apps/api/report/FUEL
+    method: "POST"
+    payload: '{"type" : ["CURRENT"] }'
+    scan_interval: 60
+    sensor:
+      - name: "AEMO Fuel NSW Solar"
+        unique_id: aemo_fuel_nsw_solar
+        value_template: |-
+          {%- set STATE = "NSW1" -%}
+          {%- set TYPE = "Solar" %}
+
+          {%- set list =  value_json.FUEL_CURRENT -%}
+          {%- set total = 0.0 -%}
+          {%- for item in list -%}
+          {%- if item.STATE == STATE -%}
+          {%- if item.FUEL_TYPE == TYPE -%}
+          {{- "%0.2f" % item.SUPPLY -}}
+          {%- endif -%}
+          {%- endif -%}
+          {%- endfor -%}
+        unit_of_measurement: "MW"
+
+      - name: "AEMO Fuel NSW Wind"
+        unique_id: aemo_fuel_nsw_wind
+        value_template: |-
+          {%- set STATE = "NSW1" -%}
+          {%- set TYPE = "Wind" %}
+
+          {%- set list =  value_json.FUEL_CURRENT -%}
+          {%- set total = 0.0 -%}
+          {%- for item in list -%}
+          {%- if item.STATE == STATE -%}
+          {%- if item.FUEL_TYPE == TYPE -%}
+          {{- "%0.2f" % item.SUPPLY -}}
+          {%- endif -%}
+          {%- endif -%}
+          {%- endfor -%}
+        unit_of_measurement: "MW"
+
+      - name: "AEMO Fuel NSW Hydro"
+        unique_id: aemo_fuel_nsw_hydro
+        value_template: |-
+          {%- set STATE = "NSW1" -%}
+          {%- set TYPE = "Hydro" %}
+
+          {%- set list =  value_json.FUEL_CURRENT -%}
+          {%- set total = 0.0 -%}
+          {%- for item in list -%}
+          {%- if item.STATE == STATE -%}
+          {%- if item.FUEL_TYPE == TYPE -%}
+          {{- "%0.2f" % item.SUPPLY -}}
+          {%- endif -%}
+          {%- endif -%}
+          {%- endfor -%}
+        unit_of_measurement: "MW"
+
+      - name: "AEMO Fuel NSW Black Coal"
+        unique_id: aemo_fuel_nsw_black_coal
+        value_template: |-
+          {%- set STATE = "NSW1" -%}
+          {%- set TYPE = "Black coal" %}
+
+          {%- set list =  value_json.FUEL_CURRENT -%}
+          {%- set total = 0.0 -%}
+          {%- for item in list -%}
+          {%- if item.STATE == STATE -%}
+          {%- if item.FUEL_TYPE == TYPE -%}
+          {{- "%0.2f" % item.SUPPLY -}}
+          {%- endif -%}
+          {%- endif -%}
+          {%- endfor -%}
+        unit_of_measurement: "MW"
+
+      - name: "AEMO Fuel NSW Gas"
+        unique_id: aemo_fuel_gas
+        value_template: |-
+          {%- set STATE = "NSW1" -%}
+          {%- set TYPE = "Gas" %}
+
+          {%- set list =  value_json.FUEL_CURRENT -%}
+          {%- set total = 0.0 -%}
+          {%- for item in list -%}
+          {%- if item.STATE == STATE -%}
+          {%- if item.FUEL_TYPE == TYPE -%}
+          {{- "%0.2f" % item.SUPPLY -}}
+          {%- endif -%}
+          {%- endif -%}
+          {%- endfor -%}
+        unit_of_measurement: "MW"
+
+      - name: "AEMO Fuel NSW Liquid Fuel"
+        unique_id: aemo_fuel_nsw_liquid_fuel
+        value_template: |-
+          {%- set STATE = "NSW1" -%}
+          {%- set TYPE = "Liquid Fuel" %}
+
+          {%- set list =  value_json.FUEL_CURRENT -%}
+          {%- set total = 0.0 -%}
+          {%- for item in list -%}
+          {%- if item.STATE == STATE -%}
+          {%- if item.FUEL_TYPE == TYPE -%}
+          {{- "%0.2f" % item.SUPPLY -}}
+          {%- endif -%}
+          {%- endif -%}
+          {%- endfor -%}
+        unit_of_measurement: "MW"
+
+      - name: "AEMO Fuel NSW Battery"
+        unique_id: aemo_fuel_nsw_battery
+        value_template: |-
+          {%- set STATE = "NSW1" -%}
+          {%- set TYPE = "Battery" %}
+
+          {%- set list =  value_json.FUEL_CURRENT -%}
+          {%- set total = 0.0 -%}
+          {%- for item in list -%}
+          {%- if item.STATE == STATE -%}
+          {%- if item.FUEL_TYPE == TYPE -%}
+          {{- "%0.2f" % item.SUPPLY -}}
+          {%- endif -%}
+          {%- endif -%}
+          {%- endfor -%}
+        unit_of_measurement: "MW"
+
+      - name: "AEMO Fuel SA Solar"
+        unique_id: aemo_fuel_sa_solar
+        value_template: |-
+          {%- set STATE = "SA1" -%}
+          {%- set TYPE = "Solar" %}
+
+          {%- set list =  value_json.FUEL_CURRENT -%}
+          {%- set total = 0.0 -%}
+          {%- for item in list -%}
+          {%- if item.STATE == STATE -%}
+          {%- if item.FUEL_TYPE == TYPE -%}
+          {{- "%0.2f" % item.SUPPLY -}}
+          {%- endif -%}
+          {%- endif -%}
+          {%- endfor -%}
+        unit_of_measurement: "MW"
+
+      - name: "AEMO Fuel SA Wind"
+        unique_id: aemo_fuel_sa_wind
+        value_template: |-
+          {%- set STATE = "SA1" -%}
+          {%- set TYPE = "Wind" %}
+
+          {%- set list =  value_json.FUEL_CURRENT -%}
+          {%- set total = 0.0 -%}
+          {%- for item in list -%}
+          {%- if item.STATE == STATE -%}
+          {%- if item.FUEL_TYPE == TYPE -%}
+          {{- "%0.2f" % item.SUPPLY -}}
+          {%- endif -%}
+          {%- endif -%}
+          {%- endfor -%}
+        unit_of_measurement: "MW"
+
+      - name: "AEMO Fuel SA Gas"
+        unique_id: aemo_fuel_sa_gas
+        value_template: |-
+          {%- set STATE = "SA1" -%}
+          {%- set TYPE = "Gas" %}
+
+          {%- set list =  value_json.FUEL_CURRENT -%}
+          {%- set total = 0.0 -%}
+          {%- for item in list -%}
+          {%- if item.STATE == STATE -%}
+          {%- if item.FUEL_TYPE == TYPE -%}
+          {{- "%0.2f" % item.SUPPLY -}}
+          {%- endif -%}
+          {%- endif -%}
+          {%- endfor -%}
+        unit_of_measurement: "MW"
+
+      - name: "AEMO Fuel SA Liquid Fuel"
+        unique_id: aemo_fuel_sa_liquid_fuel
+        value_template: |-
+          {%- set STATE = "SA1" -%}
+          {%- set TYPE = "Liquid Fuel" %}
+
+          {%- set list =  value_json.FUEL_CURRENT -%}
+          {%- set total = 0.0 -%}
+          {%- for item in list -%}
+          {%- if item.STATE == STATE -%}
+          {%- if item.FUEL_TYPE == TYPE -%}
+          {{- "%0.2f" % item.SUPPLY -}}
+          {%- endif -%}
+          {%- endif -%}
+          {%- endfor -%}
+        unit_of_measurement: "MW"
+
+      - name: "AEMO Fuel SA Battery"
+        unique_id: aemo_fuel_sa_battery
+        value_template: |-
+          {%- set STATE = "SA1" -%}
+          {%- set TYPE = "Battery" %}
+
+          {%- set list =  value_json.FUEL_CURRENT -%}
+          {%- set total = 0.0 -%}
+          {%- for item in list -%}
+          {%- if item.STATE == STATE -%}
+          {%- if item.FUEL_TYPE == TYPE -%}
+          {{- "%0.2f" % item.SUPPLY -}}
+          {%- endif -%}
+          {%- endif -%}
+          {%- endfor -%}
+        unit_of_measurement: "MW"
+
 template:
   - sensor:
-      - name: "NEM NSW Price"
-        state: "{{ '%+.1f'|format(state_attr('sensor.aemo_market_report_nsw', 'PRICE')) }}"
-        icon: mdi:lightning-bolt-outline
-        unit_of_measurement: "$/MWh"
-
-      - name: "NEM NSW Demand"
-        state: "{{ '%+.1f'|format(state_attr('sensor.aemo_market_report_nsw', 'TOTALDEMAND')) }}"
-        icon: mdi:home-lightning-bolt-outline
-        unit_of_measurement: "MW"
-
-      - name: "NEM NSW Import"
-        state: "{{ '%+.1f'|format(state_attr('sensor.aemo_market_report_nsw', 'NETINTERCHANGE')) }}"
-        icon: mdi:consolidate
-        unit_of_measurement: "MW"
-
       - name: "NEM SA Price"
         unique_id: nem_sa_price
         state: "{{ '%+.1f'|format(state_attr('sensor.aemo_market_report_sa', 'PRICE')) }}"
@@ -129,13 +323,50 @@ template:
         icon: mdi:lightning-bolt-outline
         unit_of_measurement: "$/MWh"
 
+      - name: "NEM SA Renewables"
+        unique_id: nem_sa_renewables
+        state: "{{ float(states('sensor.aemo_fuel_sa_solar')) + float(states('sensor.aemo_fuel_sa_wind')) }}"
+        icon: mdi:lightning-bolt-outline
+        unit_of_measurement: "MW"
+
+      - name: "NEM SA Battery"
+        unique_id: nem_sa_battery
+        state: "{{ states('sensor.aemo_fuel_sa_battery') }}"
+        icon: mdi:lightning-bolt-outline
+        unit_of_measurement: "MW"
+
+      - name: "NEM SA Non-renewable"
+        unique_id: nem_sa_nonrenewable
+        state: "{{ float(states('sensor.aemo_fuel_sa_gas')) + float(states('sensor.aemo_fuel_sa_liquid_fuel')) }}"
+        icon: mdi:lightning-bolt-outline
+        unit_of_measurement: "MW"
+
+      - name: "NEM SA Net Interchange"
+        unique_id: nem_sa_net_interchange
+        state: "{{ state_attr('sensor.aemo_market_sa', 'NETINTERCHANGE')}}"
+        icon: mdi:lightning-bolt-outline
+        unit_of_measurement: "MW"
+
       - name: "Local Power Status"
         unique_id: local_power_status
         state: >
-          {% if state_attr('sensor.aemo_market_report_sa', 'PRICE')|float
-          > states('sensor.sa_tarrif_feed_in')|float %}
+          {% if float(states('template.nem_sa_net_interchange')) < -10.0 %}
             export
           {% else %}
             import
+          {% endif %}
+        icon: mdi:home-lightning-bolt-outline
+
+      - name: "Local Power Status"
+        unique_id: local_power_status2
+        state: >
+          {% if float(states('sensor.nem_sa_net_interchange')) < 0.0 %}
+            blue
+          {% else %}
+          {%   if float(states('sensor.aemo_market_sa')) > 0.0 %}
+            green
+          {%   else %}
+            yellow
+          {%   endif %}
           {% endif %}
         icon: mdi:home-lightning-bolt-outline
