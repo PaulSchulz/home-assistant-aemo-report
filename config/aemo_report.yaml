@@ -294,36 +294,7 @@ rest:
 
 template:
   - sensor:
-      - name: "NEM SA Price"
-        unique_id: nem_sa_price
-        state: "{{ '%+.1f'|format(state_attr('sensor.aemo_market_report_sa', 'PRICE')) }}"
-        icon: mdi:lightning-bolt-outline
-        unit_of_measurement: "$/MWh"
-
-      - name: "NEM SA Demand"
-        unique_id: nem_sa_demand
-        state: "{{ '%+.1f'|format(state_attr('sensor.aemo_market_report_sa', 'TOTALDEMAND')) }}"
-        icon: mdi:home-lightning-bolt-outline
-        unit_of_measurement: "MW"
-
-      - name: "NEM SA Import"
-        state: "{{ '%+.1f'|format(state_attr('sensor.aemo_market_report_sa', 'NETINTERCHANGE')) }}"
-        icon: mdi:consolidate
-        unit_of_measurement: "MW"
-
-      - name: "SA Tarrif"
-        unique_id: sa_tarrif
-        state: 250.0
-        icon: mdi:lightning-bolt-outline
-        unit_of_measurement: "$/MWh"
-
-      - name: "SA Tarrif Feed In"
-        unique_id: sa_tarrif_feed_in
-        state: 150.0
-        icon: mdi:lightning-bolt-outline
-        unit_of_measurement: "$/MWh"
-
-      - name: "NEM SA Renewables"
+      - name: "NEM SA Renewable"
         unique_id: nem_sa_renewables
         state: "{{ float(states('sensor.aemo_fuel_sa_solar')) + float(states('sensor.aemo_fuel_sa_wind')) }}"
         icon: mdi:lightning-bolt-outline
@@ -341,29 +312,25 @@ template:
         icon: mdi:lightning-bolt-outline
         unit_of_measurement: "MW"
 
-      - name: "NEM SA Net Interchange"
-        unique_id: nem_sa_net_interchange
-        state: "{{ state_attr('sensor.aemo_market_sa', 'NETINTERCHANGE')}}"
+      - name: "NEM SA Import"
+        unique_id: nem_sa_import
+        state: "{{ float(state_attr('sensor.aemo_market_sa', 'NETINTERCHANGE')) * -1.0 }}"
+        icon: mdi:lightning-bolt-outline
+        unit_of_measurement: "MW"
+
+      - name: "NEM SA Demand"
+        unique_id: nem_sa_demand
+        state: "{{ float(state_attr('sensor.aemo_market_sa', 'TOTALDEMAND')) }}"
         icon: mdi:lightning-bolt-outline
         unit_of_measurement: "MW"
 
       - name: "Local Power Status"
         unique_id: local_power_status
         state: >
-          {% if float(states('template.nem_sa_net_interchange')) < -10.0 %}
-            export
-          {% else %}
-            import
-          {% endif %}
-        icon: mdi:home-lightning-bolt-outline
-
-      - name: "Local Power Status"
-        unique_id: local_power_status2
-        state: >
-          {% if float(states('sensor.nem_sa_net_interchange')) < 0.0 %}
+          {% if float(states('sensor.nem_sa_import')) < 0.0 %}
             blue
           {% else %}
-          {%   if float(states('sensor.aemo_market_sa')) > 0.0 %}
+          {%   if float(states('sensor.aemo_market_sa')) < 0.0 %}
             green
           {%   else %}
             yellow
