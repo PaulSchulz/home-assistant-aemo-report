@@ -1,0 +1,8 @@
+title: SA Power Sources
+  entities:
+  - entity: sensor.nem_sa_demand
+  - entity: sensor.nem_sa_renewables
+  - entity: sensor.nem_sa_battery
+  - entity: sensor.nem_sa_non_renewable
+  - entity: sensor.nem_sa_import
+hours_to_show: 24
