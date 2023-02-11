@@ -1,0 +1,73 @@
+#!/usr/bin/env python3
+
+# Get market summary report
+# wget https://visualisations.aemo.com.au/aemo/apps/api/report/ELEC_NEM_SUMMARY -O - \
+#    | jq
+
+# Get fual mix report
+# wget --post-data "{\"type\":[\"CURRENT\"]}" \
+#   https://visualisations.aemo.com.au/aemo/apps/api/report/FUEL -O - \
+#  | jq
+
+import subprocess
+import json
+import jinja2
+
+from pprint import pprint
+
+# AEMO Report
+if False:
+    result = subprocess.run(["wget",
+                             "https://visualisations.aemo.com.au/aemo/apps/api/report/ELEC_NEM_SUMMARY",
+                             "-O",
+                             "-"],
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.DEVNULL)
+
+    json_output = result.stdout.decode('utf-8')
+    parsed_json = json.loads(json_output)
+
+
+    print("---")
+    print(parsed_json)
+    print("---")
+    pprint(parsed_json['ELEC_NEM_SUMMARY'][0])
+    print("---")
+    template_string = "{{ ELEC_NEM_SUMMARY[4].PRICE }}"
+    template = jinja2.Template(template_string)
+    output = template.render(parsed_json)
+    print(output)
+
+# FUEL Mix Report
+if True:
+    result = subprocess.run(["wget",
+                             "--post-data", "{\"type\":[\"CURRENT\"]}",
+                             "https://visualisations.aemo.com.au/aemo/apps/api/report/FUEL",
+                             "-O",
+                             "-"],
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.DEVNULL)
+    json_output = result.stdout.decode('utf-8')
+    parsed_json = json.loads(json_output)
+    data = {}
+    data['value_json'] = parsed_json
+
+    print("---")
+    #pprint(parsed_json)
+    print("---")
+    # template_string = "{{ value_json.FUEL_CURRENT | first }}"
+    template_string = """
+    {%- set STATE = "NSW1" -%}
+    {%- set list = value_json.FUEL_CURRENT -%}
+    {%- for item in list -%}
+    {%- if item.STATE == STATE -%}
+    {%- if item.FUEL_TYPE == "Solar" -%}
+    {{- item.SUPPLY -}}
+    {%- endif -%}
+    {%- endif -%}
+    {%- endfor -%}
+"""
+
+    template = jinja2.Template(template_string)
+    output = template.render(data)
+    print(output)
