@@ -4,27 +4,27 @@
 
 * Introduction
 
-This Home Assistant Integration retrieves the National Energy Market (NEM)
-Reports from Australia
+This Home Assistant Integration retrieves data from the National Energy
+Market (NEM) in Australia.
 
-This sensor uses the official API to get the the current report on the status of
-the Electricity Grid on the east coast of Australia, including South Australia.
-This report is available from
+This integration uses the official API to get the the current report on the
+status of the Electricity Grid on the east coast of Australia, including South
+Australia. This report is available from
 https://visualisations.aemo.com.au/aemo/apps/api/report/ELEC_NEM_SUMMARY
 
 Specifically, the report contains the current energy pricing in the various
 submarkets, and the production and consumption values and any network notices
 which are currently active.
 
-* Development Status
+* Status
 
 The initial (and current) development uses existing Home Assistant integrations
 (RESTful and Template) to poll the API for the report, import and process the
 data and create entities for monitoring and displaying the data.
 
 ** Installation
-Copy the configuration file (config/aemo_report.yaml) into the site Home
-Assistant configuration file. (A file access tool may be required to do this.)
+Copy the configuration file (config/aemo_report.yaml) into your Home Assistant
+configuration file. (The file access tool add-on be required to do this.)
 
 A dashboard definition file which has some suitable cards already defined can be
 found in 'dashboards/', with individual cards defined in 'cards/'.
@@ -42,17 +42,20 @@ found in 'dashboards/', with individual cards defined in 'cards/'.
   which can be easily installed without manually editing YAML files.
 
 * Notes
-*** Summary Report
+*** Summary of the Report extraction 
 On a Linux host, the AEMO JSON report can be downloaded with the following
 command (if you have *wget* and *jq* installed):
 
 #+begin_src sh
   wget https://visualisations.aemo.com.au/aemo/apps/api/report/ELEC_NEM_SUMMARY -O - \
     | jq
+
+    wget https://visualisations.aemo.com.au/aemo/apps/api/report/ELEC_NEM_SUMMARY -O - \
+    | jq > ELEC_NEM_SUMMARY.json
 #+end_src
 
-The summary report looks something like the following, where the arrays have
-been concatted to a single element.
+The summary report looks something like the following, where the first element
+of the arrays is shown.
 #+begin_src json
     {
       "ELEC_NEM_SUMMARY": [
@@ -93,7 +96,8 @@ been concatted to a single element.
     }
 #+end_src
 
-To extract data from this the following configuration is used:
+The following yaml configuration will download the report and extract the useful
+market information::
 #+begin_src yaml
 rest:
   - resource: https://visualisations.aemo.com.au/aemo/apps/api/report/ELEC_NEM_SUMMARY
@@ -114,7 +118,9 @@ rest:
         unit_of_measurement: "$/MWh"
 #+end_src
 
-The full report is:
+*** Full report details
+
+An example of the the full report is:
 #+begin_src json
   {
     "ELEC_NEM_SUMMARY": [
