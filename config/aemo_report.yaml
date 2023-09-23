@@ -16,7 +16,7 @@ rest:
       - name: "AEMO Market Report NSW"
         unique_id: aemo_report_nsw
         icon: mdi:transmission-tower-export
-        json_attributes_path: "$.[0]"
+        json_attributes_path: "$.ELEC_NEM_SUMMARY[?(@.REGIONID=='NSW1')]"
         json_attributes:
           - REGIONID
           - PRICE
@@ -24,13 +24,13 @@ rest:
           - NETINTERCHANGE
           - SEMISCHEDULEDGENERATION
           - SETTLEMENTDATE
-        value_template: "{{ value_json.ELEC_NEM_SUMMARY[0].PRICE }}"
+        value_template: "{{ (value_json.ELEC_NEM_SUMMARY | selectattr('REGIONID','eq','NSW1') | list | first).PRICE | round(4) }}"
         unit_of_measurement: "$/MWh"
 
       - name: "AEMO Market Report QLD"
         unique_id: aemo_report_qld
         icon: mdi:transmission-tower-export
-        json_attributes_path: "$.[1]"
+        json_attributes_path: "$.ELEC_NEM_SUMMARY[?(@.REGIONID=='QLD1')]"
         json_attributes:
           - REGIONID
           - PRICE
@@ -38,27 +38,27 @@ rest:
           - NETINTERCHANGE
           - SEMISCHEDULEDGENERATION
           - SETTLEMENTDATE
-        value_template: "{{ value_json.ELEC_NEM_SUMMARY[1].PRICE }}"
+        value_template: "{{ (value_json.ELEC_NEM_SUMMARY | selectattr('REGIONID','eq','QLD1') | list | first).PRICE | round(4) }}" 
         unit_of_measurement: "$/MWh"
 
       - name: "AEMO Market Report SA"
         unique_id: aemo_report_sa
         icon: mdi:transmission-tower-export
-        json_attributes_path: "$.[2]"
-        json_attributes:
+        json_attributes_path: "$.ELEC_NEM_SUMMARY[?(@.REGIONID=='SA1')]"
+        json_attributes: 
           - REGIONID
           - PRICE
           - TOTALDEMAND
           - NETINTERCHANGE
           - SEMISCHEDULEDGENERATION
           - SETTLEMENTDATE
-        value_template: "{{ value_json.ELEC_NEM_SUMMARY[2].PRICE }}"
+        value_template: "{{ (value_json.ELEC_NEM_SUMMARY | selectattr('REGIONID','eq','SA1') | list | first).PRICE | round(4) }}" 
         unit_of_measurement: "$/MWh"
 
       - name: "AEMO Market Report TAS"
         unique_id: aemo_report_tas
         icon: mdi:transmission-tower-export
-        json_attributes_path: "$.[3]"
+        json_attributes_path: "$.ELEC_NEM_SUMMARY[?(@.REGIONID=='TAS1')]"
         json_attributes:
           - REGIONID
           - PRICE
@@ -66,13 +66,13 @@ rest:
           - NETINTERCHANGE
           - SEMISCHEDULEDGENERATION
           - SETTLEMENTDATE
-        value_template: "{{ value_json.ELEC_NEM_SUMMARY[3].PRICE }}"
+        value_template: "{{ (value_json.ELEC_NEM_SUMMARY | selectattr('REGIONID','eq','TAS1') | list | first).PRICE | round(4) }}"
         unit_of_measurement: "$/MWh"
 
       - name: "AEMO Market Report VIC"
         unique_id: aemo_report_vic
         icon: mdi:transmission-tower-export
-        json_attributes_path: "$.[4]"
+        json_attributes_path: "$.ELEC_NEM_SUMMARY[?(@.REGIONID=='VIC1')]"
         json_attributes:
           - REGIONID
           - PRICE
@@ -80,7 +80,7 @@ rest:
           - NETINTERCHANGE
           - SEMISCHEDULEDGENERATION
           - SETTLEMENTDATE
-        value_template: "{{ value_json.ELEC_NEM_SUMMARY[4].PRICE }}"
+        value_template: "{{ (value_json.ELEC_NEM_SUMMARY | selectattr('REGIONID','eq','VIC1') | list | first).PRICE | round(4) }}"
         unit_of_measurement: "$/MWh"
 
   - resource: https://visualisations.aemo.com.au/aemo/apps/api/report/FUEL

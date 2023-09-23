@@ -30,10 +30,9 @@ A dashboard definition file which has some suitable cards already defined can be
 found in 'dashboards/', with individual cards defined in 'cards/'.
 
 ** Current Issues and Future Development
-
-- The import of the various State(Market) parameters explicitly depends on the
-  order listed int he JSON report. If this order ever changes, the data will be
-  incorrectly reported.
+- [FIXED] The import of the various State(Market) parameters explicitly depends
+  on the order listed int he JSON report. If this order ever changes, the data
+  will be incorrectly reported.
 
 - The JSON report contains more information (eg. Network Notices, Interconnector
   Power Transfers). It would be good to display more of these details.
