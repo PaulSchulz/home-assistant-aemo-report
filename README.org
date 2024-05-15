@@ -2,6 +2,14 @@
 
 [[file:images/national-energy-market.png]]
 
+* Contents :TOC:
+- [[#introduction][Introduction]]
+- [[#installation][Installation]]
+- [[#status][Status]]
+  - [[#current-issues-and-future-development][Current Issues and Future Development]]
+- [[#notes][Notes]]
+- [[#usage-license][Usage License]]
+
 * Introduction
 
 This Home Assistant Integration retrieves data from the National Energy
@@ -16,18 +24,20 @@ Specifically, the report contains the current energy pricing in the various
 submarkets, and the production and consumption values and any network notices
 which are currently active.
 
-* Status
-
-The initial (and current) development uses existing Home Assistant integrations
-(RESTful and Template) to poll the API for the report, import and process the
-data and create entities for monitoring and displaying the data.
-
-** Installation
+* Installation
 Copy the configuration file (config/aemo_report.yaml) into your Home Assistant
-configuration file. (The file access tool add-on be required to do this.)
+configuration file. (You will need to be an Admin user and have 'Advanced Mode'
+turned on, and a file access tool add-on; either File
+Editor, Studio Code Server.)
 
 A dashboard definition file which has some suitable cards already defined can be
 found in 'dashboards/', with individual cards defined in 'cards/'.
+
+* Status
+
+This functionality uses existing Home Assistant integrations (RESTful and
+Template) to poll the API for the report, import and process the data and create
+entities for monitoring and displaying the data.
 
 ** Current Issues and Future Development
 - [FIXED] The import of the various State(Market) parameters explicitly depends
@@ -37,12 +47,18 @@ found in 'dashboards/', with individual cards defined in 'cards/'.
 - The JSON report contains more information (eg. Network Notices, Interconnector
   Power Transfers). It would be good to display more of these details.
 
-- Further development of this configuration into an integration (AEMO Report)
-  which can be easily installed without manually editing YAML files.
+- Development of these configurations into an integration (AEMO Report), or
+  blueprints, which can be easily installed without manually editing YAML files.
+
+- Add additional AEMO data and charts for fuel source (eg. Coal, Gas, Wind, Solar or
+  Battery). This data is available in the AEMO FUEL report. 
 
 * Notes
-*** Summary of the Report extraction 
-On a Linux host, the AEMO JSON report can be downloaded with the following
+This code has been developed on a Linux computer before implementing in Home
+Assistant. The examples below use the 'bash' command line.
+
+*** Query for the Wholesale Price
+On a Linux computer, the AEMO JSON report can be downloaded with the following
 command (if you have *wget* and *jq* installed):
 
 #+begin_src sh
@@ -97,24 +113,63 @@ of the arrays is shown.
 
 The following yaml configuration will download the report and extract the useful
 market information::
+
 #+begin_src yaml
-rest:
-  - resource: https://visualisations.aemo.com.au/aemo/apps/api/report/ELEC_NEM_SUMMARY
-    scan_interval: 60
-    sensor:
-      - name: "AEMO Market Report SA"
-        unique_id: aemo_report_sa
-        icon: mdi:transmission-tower-export
-        json_attributes_path: "$.[2]"
-        json_attributes:
-          - REGIONID
-          - PRICE
-          - TOTALDEMAND
-          - NETINTERCHANGE
-          - SEMISCHEDULEDGENERATION
-          - SETTLEMENTDATE
-        value_template: "{{ value_json.ELEC_NEM_SUMMARY[2].PRICE }}"
-        unit_of_measurement: "$/MWh"
+  rest:
+    - resource: https://visualisations.aemo.com.au/aemo/apps/api/report/ELEC_NEM_SUMMARY
+      scan_interval: 60
+      sensor:
+        - name: "AEMO Report NSW"
+          unique_id: aemo_report_nsw
+          icon: mdi:transmission-tower-export
+          json_attributes_path: "$|selectattr('REGIONID','==','NSW1')"
+          json_attributes:
+            - REGIONID
+            - PRICE
+            - TOTALDEMAND
+            - NETINTERCHANGE
+            - SEMISCHEDULEDGENERATION
+            - SETTLEMENTDATE
+          value_template: "{{ value_json.ELEC_NEM_SUMMARY|selectattr('REGIONID','==','NSW1').PRICE }}"
+          unit_of_measurement: "$/MWh"
+#+end_src
+
+To pull out the attributes into entities
+#+begin_src yaml
+  # NSW Price, Demand, Import Export
+  template:
+    sensor:  
+      - name: "NEM NSW Price"
+          state: "{{ '%+.1f'|format(state_attr('sensor.aemo_market_report_nsw', 'PRICE')) }}"
+          icon: mdi:lightning-bolt-outline
+          unit_of_measurement: "$/MWh"
+
+        - name: "NEM NSW Demand"
+          state: "{{ '%+.1f'|format(state_attr('sensor.aemo_market_report_nsw', 'TOTALDEMAND')) }}"
+          icon: mdi:home-lightning-bolt-outline
+          unit_of_measurement: "MW"
+
+        - name: "NEM NSW Import"
+          unique_id: nem_nsw_import
+          state: >
+            {% set import = state_attr('sensor.aemo_market_report_nsw', 'NETINTERCHANGE')|float * -1.0 -%}
+            {% if import < 0.0 -%} 
+            {%   set import = 0.0 -%}
+            {% endif -%} 
+            {{ import }}
+          icon: mdi:consolidate
+          unit_of_measurement: "MW"
+
+        - name: "NEM NSW Export"
+          unique_id: nem_nsw_export
+          state: >
+            {% set export = state_attr('sensor.aemo_market_report_nsw', 'NETINTERCHANGE')|float -%}
+            {% if export < 0.0 -%}
+            {%   set export = 0.0 -%}
+            {% endif -%} 
+            {{ export }}
+          icon: mdi:consolidate
+          unit_of_measurement: "MW"
 #+end_src
 
 *** Full report details
@@ -315,7 +370,7 @@ An example of the the full report is:
 *** Other Reports
 Fuel Mix Report
 #+begin_src 
-wget --post-data "{\"type\":[\"CURRENT\"]}" \
+wget --post-data '{"type":["CURRENT"]}' \
    https://visualisations.aemo.com.au/aemo/apps/api/report/FUEL -O - | jq
 #+end_src
 
