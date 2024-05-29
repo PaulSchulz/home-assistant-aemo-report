@@ -1,0 +1,109 @@
+---- New South Wales ----
+market: {{ states('sensor.aemo_market_report_nsw')}}
+
+price:  {{ states('sensor.nem_nsw_price')}}
+export: {{ states('sensor.nem_nsw_export')}}
+import: {{ states('sensor.nem_nsw_import')}}
+demand: {{ states('sensor.nem_nsw_demand')}}
+
+solar:       {{ states('sensor.aemo_fuel_nsw_solar')}}
+wind:        {{ states('sensor.aemo_fuel_nsw_wind')}}
+hydro:       {{ states('sensor.aemo_fuel_nsw_hydro')}}
+biomass:     {{ states('sensor.aemo_fuel_nsw_biomass')}}
+gas:         {{ states('sensor.aemo_fuel_nsw_gas')}}
+liquid_fuel: {{ states('sensor.aemo_fuel_nsw_liquid_fuel')}}
+brown_coal:  {{ states('sensor.aemo_fuel_nsw_brown_coal')}}
+black_coal:  {{ states('sensor.aemo_fuel_nsw_black_coal')}}
+battery:     {{ states('sensor.aemo_fuel_nsw_battery')}}
+
+renewables:      {{ states('sensor.aemo_fuel_nsw_renewables')}}
+non-renewables:  {{ states('sensor.aemo_fuel_nsw_non_renewables')}}
+others(storage): {{ states('sensor.aemo_fuel_nsw_others')}}
+
+---- Queensland ----
+market: {{ states('sensor.aemo_market_report_qld')}}
+
+price:  {{ states('sensor.nem_qld_price')}}
+export: {{ states('sensor.nem_qld_export')}}
+import: {{ states('sensor.nem_qld_import')}}
+demand: {{ states('sensor.nem_qld_demand')}}
+
+solar:       {{ states('sensor.aemo_fuel_qld_solar')}}
+wind:        {{ states('sensor.aemo_fuel_qld_wind')}}
+hydro:       {{ states('sensor.aemo_fuel_qld_hydro')}}
+biomass:     {{ states('sensor.aemo_fuel_qld_biomass')}}
+gas:         {{ states('sensor.aemo_fuel_qld_gas')}}
+liquid_fuel: {{ states('sensor.aemo_fuel_qld_liquid_fuel')}}
+brown_coal:  {{ states('sensor.aemo_fuel_qld_brown_coal')}}
+black_coal:  {{ states('sensor.aemo_fuel_qld_black_coal')}}
+battery:     {{ states('sensor.aemo_fuel_qld_battery')}}
+
+renewabled:      {{ states('sensor.aemo_fuel_qld_renewables')}}
+non-renewables:  {{ states('sensor.aemo_fuel_qld_non_renewables_2')}}
+others(storage): {{ states('sensor.aemo_fuel_qld_others')}}
+
+---- Victoria ----
+market: {{ states('sensor.aemo_market_report_vic')}}
+
+price:  {{ states('sensor.nem_vic_price')}}
+export: {{ states('sensor.nem_vic_export')}}
+import: {{ states('sensor.nem_vic_import')}}
+demand: {{ states('sensor.nem_vic_demand')}}
+
+solar:       {{ states('sensor.aemo_fuel_vic_solar')}}
+wind:        {{ states('sensor.aemo_fuel_vic_wind')}}
+hydro:       {{ states('sensor.aemo_fuel_vic_hydro')}}
+biomass:     {{ states('sensor.aemo_fuel_vic_biomass')}}
+gas:         {{ states('sensor.aemo_fuel_vic_gas')}}
+liquid_fuel: {{ states('sensor.aemo_fuel_vic_liquid_fuel')}}
+brown_coal:  {{ states('sensor.aemo_fuel_vic_brown_coal')}}
+black_coal:  {{ states('sensor.aemo_fuel_vic_black_coal')}}
+battery:     {{ states('sensor.aemo_fuel_vic_battery')}}
+
+renewables:      {{ states('sensor.aemo_fuel_vic_renewables')}}
+non-renewables:  {{ states('sensor.aemo_fuel_vic_non_renewables')}}
+others(storage): {{ states('sensor.aemo_fuel_vic_others')}}
+
+---- South Australia ----
+market: {{ states('sensor.aemo_market_report_sa')}}
+
+price:  {{ states('sensor.nem_sa_price')}}
+export: {{ states('sensor.nem_sa_export')}}
+import: {{ states('sensor.nem_sa_import')}}
+demand: {{ states('sensor.nem_sa_demand')}}
+
+solar:       {{ states('sensor.aemo_fuel_sa_solar')}}
+wind:        {{ states('sensor.aemo_fuel_sa_wind')}}
+hydro:       {{ states('sensor.aemo_fuel_sa_hydro')}}
+biomass:     {{ states('sensor.aemo_fuel_sa_biomass')}}
+gas:         {{ states('sensor.aemo_fuel_sa_gas')}}
+liquid_fuel: {{ states('sensor.aemo_fuel_sa_liquid_fuel')}}
+brown_coal:  {{ states('sensor.aemo_fuel_sa_brown_coal')}}
+black_coal:  {{ states('sensor.aemo_fuel_sa_black_coal')}}
+battery:     {{ states('sensor.aemo_fuel_sa_battery')}}
+
+renewables:     {{ states('sensor.aemo_fuel_sa_renewables')}}
+non-renewables: {{ states('sensor.aemo_fuel_sa_non_renewables_2')}}
+other(storage): {{ states('sensor.aemo_fuel_sa_others')}}
+
+---- Tasmania ----
+report: {{ states('sensor.aemo_market_report_tas')}}
+
+price:  {{ states('sensor.nem_tas_price')}}
+export: {{ states('sensor.nem_tas_export')}}
+import: {{ states('sensor.nem_tas_import')}}
+demand: {{ states('sensor.nem_tas_demand')}}
+
+solar:       {{ states('sensor.aemo_fuel_tas_solar')}}
+wind:        {{ states('sensor.aemo_fuel_tas_wind')}}
+hydro:       {{ states('sensor.aemo_fuel_tas_hydro')}}
+biomass:     {{ states('sensor.aemo_fuel_tas_biomass')}}
+gas:         {{ states('sensor.aemo_fuel_tas_gas')}}
+liquid_fuel: {{ states('sensor.aemo_fuel_tas_liquid_fuel')}}
+brown_coal:  {{ states('sensor.aemo_fuel_tas_brown_coal')}}
+black_coal:  {{ states('sensor.aemo_fuel_tas_black_coal')}}
+battery:     {{ states('sensor.aemo_fuel_tas_battery')}}
+
+renewables:      {{ states('sensor.aemo_fuel_tas_renewables')}}
+non-renewables:  {{ states('sensor.aemo_fuel_tas_non_renewables')}}
+others(storage): {{ states('sensor.aemo_fuel_tas_others')}}

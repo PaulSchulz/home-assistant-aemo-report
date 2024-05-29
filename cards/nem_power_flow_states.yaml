@@ -1,3 +1,28 @@
+# Uses a vertical-stack to display a power flow sankey chart for each sate region.
+#
+# It assumes that all required entities exist (may be zero), which need to be
+# defined in a rest or template sensor. For example with NSW
+#
+# renewables:
+#   - sensor.aemo_fuel_nsw_solar
+#   - sensor.aemo_fuel_nsw_wind
+#   - sensor.aemo_fuel_nsw_hydro
+#   - sensor.aemo_fuel_nsw_biomass
+#
+# non-renewables:
+#   - sensor.aemo_fuel_nsw_gas
+#   - sensor.aemo_fuel_nsw_liquid_fuel
+#   - sensor.aemo_fuel_nsw_brown_coal
+#   - sensor.aemo_fuel_nsw_black_coal
+#
+# and other sources (storage)
+#   - sensor.aemo_fuel_nsw_battery
+#
+# network entities:
+#   - sensor.nem_nsw_import
+#   - sensor.nem_nsw_demand
+#   - sensor.nem_nsw_export
+##############################################################################
 type: vertical-stack
 cards:
   - title: New South Wales
