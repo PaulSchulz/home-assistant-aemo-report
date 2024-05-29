@@ -1,0 +1,571 @@
+type: vertical-stack
+cards:
+  - title: New South Wales
+    unit_prefix: M
+    round: 0
+    convert_units_to: ''
+    co2_intensity_entity: sensor.co2_signal_co2_intensity
+    gas_co2_intensity: 2351.6459999999997
+    min_box_height: 20
+    min_box_distance: 5
+    show_states: true
+    show_units: true
+    wide: true
+    sections:
+      - entities:
+          - type: entity
+            children:
+              - total_renewable
+            entity_id: sensor.aemo_fuel_nsw_solar
+            color: yellow
+            name: Solar
+          - type: entity
+            children:
+              - total_renewable
+            entity_id: sensor.aemo_fuel_nsw_wind
+            color: green
+            name: Wind
+          - type: entity
+            children:
+              - total_renewable
+            entity_id: sensor.aemo_fuel_nsw_hydro
+            color: blue
+            name: Hydro
+          - type: entity
+            children:
+              - total_renewable
+            entity_id: sensor.aemo_fuel_nsw_biomass
+            color: orange
+            name: Biomass
+          - type: entity
+            children:
+              - total_nonrenewable
+            entity_id: sensor.aemo_fuel_nsw_gas
+            color: cyan
+            name: Gas
+          - type: entity
+            children:
+              - total_nonrenewable
+            entity_id: sensor.aemo_fuel_nsw_liquid_fuel
+            color: red
+            name: Liquid Fuel
+          - type: entity
+            children:
+              - total_nonrenewable
+            entity_id: sensor.aemo_fuel_nsw_brown_coal
+            color: grey
+            name: Brown Coal
+          - type: entity
+            children:
+              - total_nonrenewable
+            entity_id: sensor.aemo_fuel_nsw_black_coal
+            color: grey
+            name: Black Coal
+          - type: entity
+            children:
+              - total_other
+            entity_id: sensor.aemo_fuel_nsw_battery
+            color: purple
+            name: Battery
+      - entities:
+          - type: remaining_parent_state
+            children:
+              - network
+            entity_id: total_renewable
+            name: Renewable
+            color: green
+          - type: remaining_parent_state
+            children:
+              - network
+            entity_id: total_nonrenewable
+            name: Non-Renewable
+            color: grey
+          - type: remaining_parent_state
+            children:
+              - network
+            entity_id: total_other
+            name: Other
+          - type: entity
+            children:
+              - network
+            entity_id: sensor.nem_nsw_import
+            name: Import
+      - entities:
+          - type: remaining_parent_state
+            children:
+              - sensor.nem_nsw_demand
+              - sensor.nem_nsw_export
+              - demand_other
+            entity_id: network
+            name: Network
+      - entities:
+          - type: entity
+            children: []
+            entity_id: sensor.nem_nsw_demand
+            name: Demand
+          - type: entity
+            children: []
+            entity_id: sensor.nem_nsw_export
+            name: Export
+          - type: remaining_parent_state
+            children: []
+            entity_id: demand_other
+            name: Other
+    type: custom:sankey-chart
+    show_names: true
+  - title: Queensland
+    unit_prefix: M
+    round: 0
+    convert_units_to: ''
+    co2_intensity_entity: sensor.co2_signal_co2_intensity
+    gas_co2_intensity: 2351.6459999999997
+    min_box_height: 20
+    min_box_distance: 5
+    show_states: true
+    show_units: true
+    wide: true
+    sections:
+      - entities:
+          - type: entity
+            children:
+              - total_renewable
+            entity_id: sensor.aemo_fuel_qld_solar
+            color: yellow
+            name: Solar
+          - type: entity
+            children:
+              - total_renewable
+            entity_id: sensor.aemo_fuel_qld_wind
+            color: green
+            name: Wind
+          - type: entity
+            children:
+              - total_renewable
+            entity_id: sensor.aemo_fuel_qld_hydro
+            color: blue
+            name: Hydro
+          - type: entity
+            children:
+              - total_renewable
+            entity_id: sensor.aemo_fuel_qld_biomass
+            color: orange
+            name: Biomass
+          - type: entity
+            children:
+              - total_nonrenewable
+            entity_id: sensor.aemo_fuel_qld_gas
+            color: cyan
+            name: Gas
+          - type: entity
+            children:
+              - total_nonrenewable
+            entity_id: sensor.aemo_fuel_qld_liquid_fuel
+            color: red
+            name: Liquid Fuel
+          - type: entity
+            children:
+              - total_nonrenewable
+            entity_id: sensor.aemo_fuel_qld_brown_coal
+            color: grey
+            name: Brown Coal
+          - type: entity
+            children:
+              - total_nonrenewable
+            entity_id: sensor.aemo_fuel_qld_black_coal
+            color: grey
+            name: Black Coal
+          - type: entity
+            children:
+              - total_other
+            entity_id: sensor.aemo_fuel_qld_battery
+            color: purple
+            name: Battery
+      - entities:
+          - type: remaining_parent_state
+            children:
+              - network
+            entity_id: total_renewable
+            name: Renewable
+            color: green
+          - type: remaining_parent_state
+            children:
+              - network
+            entity_id: total_nonrenewable
+            name: Non-Renewable
+            color: grey
+          - type: remaining_parent_state
+            children:
+              - network
+            entity_id: total_other
+            name: Other
+          - type: entity
+            children:
+              - network
+            entity_id: sensor.nem_qld_import
+            name: Import
+      - entities:
+          - type: remaining_parent_state
+            children:
+              - sensor.nem_qld_demand
+              - sensor.nem_qld_export
+              - demand_other
+            entity_id: network
+            name: Network
+      - entities:
+          - type: entity
+            children: []
+            entity_id: sensor.nem_qld_demand
+            name: Demand
+          - type: entity
+            children: []
+            entity_id: sensor.nem_qld_export
+            name: Export
+          - type: remaining_parent_state
+            children: []
+            entity_id: demand_other
+            name: Other
+    type: custom:sankey-chart
+    show_names: true
+  - height: 200
+    unit_prefix: M
+    round: 0
+    convert_units_to: ''
+    co2_intensity_entity: sensor.co2_signal_co2_intensity
+    gas_co2_intensity: 2351.6459999999997
+    min_box_height: 20
+    min_box_distance: 5
+    show_states: true
+    show_units: true
+    sections:
+      - entities:
+          - type: entity
+            children:
+              - total_renewable
+            entity_id: sensor.aemo_fuel_vic_solar
+            color: yellow
+            name: Solar
+          - type: entity
+            children:
+              - total_renewable
+            entity_id: sensor.aemo_fuel_vic_wind
+            color: green
+            name: Wind
+          - type: entity
+            children:
+              - total_renewable
+            entity_id: sensor.aemo_fuel_vic_hydro
+            color: blue
+            name: Hydro
+          - type: entity
+            children:
+              - total_renewable
+            entity_id: sensor.aemo_fuel_vic_biomass
+            color: orange
+            name: Biomass
+          - type: entity
+            children:
+              - total_nonrenewable
+            entity_id: sensor.aemo_fuel_vic_gas
+            color: cyan
+            name: Gas
+          - type: entity
+            children:
+              - total_nonrenewable
+            entity_id: sensor.aemo_fuel_vic_liquid_fuel
+            color: red
+            name: Liquid Fuel
+          - type: entity
+            children:
+              - total_nonrenewable
+            entity_id: sensor.aemo_fuel_vic_brown_coal
+            color: grey
+            name: Brown Coal
+          - type: entity
+            children:
+              - total_nonrenewable
+            entity_id: sensor.aemo_fuel_vic_black_coal
+            color: grey
+            name: Black Coal
+          - type: entity
+            children:
+              - total_other
+            entity_id: sensor.aemo_fuel_vic_battery
+            color: purple
+            name: Battery
+      - entities:
+          - type: remaining_parent_state
+            children:
+              - network
+            entity_id: total_renewable
+            name: Renewable
+            color: green
+          - type: remaining_parent_state
+            children:
+              - network
+            entity_id: total_nonrenewable
+            name: Non-Renewable
+            color: grey
+          - type: remaining_parent_state
+            children:
+              - network
+            entity_id: total_other
+            name: Other
+          - type: entity
+            children:
+              - network
+            entity_id: sensor.nem_vic_import
+            name: Import
+      - entities:
+          - type: remaining_parent_state
+            children:
+              - sensor.nem_vic_demand
+              - sensor.nem_vic_export
+              - demand_other
+            entity_id: network
+            name: Network
+      - entities:
+          - type: entity
+            children: []
+            entity_id: sensor.nem_vic_demand
+            name: Demand
+          - type: entity
+            children: []
+            entity_id: sensor.nem_vic_export
+            name: Export
+          - type: remaining_parent_state
+            children: []
+            entity_id: demand_other
+            name: Other
+    wide: true
+    type: custom:sankey-chart
+    show_names: true
+    min_state: 0
+    title: Victoria
+  - title: South Australia
+    unit_prefix: M
+    round: 0
+    convert_units_to: ''
+    co2_intensity_entity: sensor.co2_signal_co2_intensity
+    gas_co2_intensity: 2351.6459999999997
+    min_box_height: 20
+    min_box_distance: 5
+    show_states: true
+    show_units: true
+    wide: true
+    sections:
+      - entities:
+          - type: entity
+            children:
+              - total_renewable
+            entity_id: sensor.aemo_fuel_sa_solar
+            color: yellow
+            name: Solar
+          - type: entity
+            children:
+              - total_renewable
+            entity_id: sensor.aemo_fuel_sa_wind
+            color: green
+            name: Wind
+          - type: entity
+            children:
+              - total_renewable
+            entity_id: sensor.aemo_fuel_sa_hydro
+            color: blue
+            name: Hydro
+          - type: entity
+            children:
+              - total_renewable
+            entity_id: sensor.aemo_fuel_sa_biomass
+            color: orange
+            name: Biomass
+          - type: entity
+            children:
+              - total_nonrenewable
+            entity_id: sensor.aemo_fuel_sa_gas
+            color: cyan
+            name: Gas
+          - type: entity
+            children:
+              - total_nonrenewable
+            entity_id: sensor.aemo_fuel_sa_liquid_fuel
+            color: red
+            name: Liquid Fuel
+          - type: entity
+            children:
+              - total_nonrenewable
+            entity_id: sensor.aemo_fuel_sa_brown_coal
+            color: grey
+            name: Brown Coal
+          - type: entity
+            children:
+              - total_nonrenewable
+            entity_id: sensor.aemo_fuel_sa_black_coal
+            color: grey
+            name: Black Coal
+          - type: entity
+            children:
+              - total_other
+            entity_id: sensor.aemo_fuel_sa_battery
+            color: purple
+            name: Battery
+      - entities:
+          - type: remaining_parent_state
+            children:
+              - network
+            entity_id: total_renewable
+            name: Renewable
+            color: green
+          - type: remaining_parent_state
+            children:
+              - network
+            entity_id: total_nonrenewable
+            name: Non-Renewable
+            color: grey
+          - type: remaining_parent_state
+            children:
+              - network
+            entity_id: total_other
+            name: Other
+          - type: entity
+            children:
+              - network
+            entity_id: sensor.nem_sa_import
+            name: Import
+      - entities:
+          - type: remaining_parent_state
+            children:
+              - sensor.nem_sa_demand
+              - sensor.nem_sa_export
+              - demand_other
+            entity_id: network
+            name: Network
+      - entities:
+          - type: entity
+            children: []
+            entity_id: sensor.nem_sa_demand
+            name: Demand
+          - type: entity
+            children: []
+            entity_id: sensor.nem_sa_export
+            name: Export
+          - type: remaining_parent_state
+            children: []
+            entity_id: demand_other
+            name: Other
+    type: custom:sankey-chart
+    show_names: true
+  - height: 200
+    unit_prefix: M
+    round: 0
+    convert_units_to: ''
+    co2_intensity_entity: sensor.co2_signal_co2_intensity
+    gas_co2_intensity: 2351.6459999999997
+    min_box_height: 20
+    min_box_distance: 5
+    show_states: true
+    show_units: true
+    sections:
+      - entities:
+          - type: entity
+            children:
+              - total_renewable
+            entity_id: sensor.aemo_fuel_tas_solar
+            color: yellow
+            name: Solar
+          - type: entity
+            children:
+              - total_renewable
+            entity_id: sensor.aemo_fuel_tas_wind
+            color: green
+            name: Wind
+          - type: entity
+            children:
+              - total_renewable
+            entity_id: sensor.aemo_fuel_tas_hydro
+            color: blue
+            name: Hydro
+          - type: entity
+            children:
+              - total_renewable
+            entity_id: sensor.aemo_fuel_tas_biomass
+            color: orange
+            name: Biomass
+          - type: entity
+            children:
+              - total_nonrenewable
+            entity_id: sensor.aemo_fuel_tas_gas
+            color: cyan
+            name: Gas
+          - type: entity
+            children:
+              - total_nonrenewable
+            entity_id: sensor.aemo_fuel_tas_liquid_fuel
+            color: red
+            name: Liquid Fuel
+          - type: entity
+            children:
+              - total_nonrenewable
+            entity_id: sensor.aemo_fuel_tas_brown_coal
+            color: grey
+            name: Brown Coal
+          - type: entity
+            children:
+              - total_nonrenewable
+            entity_id: sensor.aemo_fuel_tas_black_coal
+            color: grey
+            name: Black Coal
+          - type: entity
+            children:
+              - total_other
+            entity_id: sensor.aemo_fuel_tas_battery
+            color: purple
+            name: Battery
+      - entities:
+          - type: remaining_parent_state
+            children:
+              - network
+            entity_id: total_renewable
+            name: Renewable
+            color: green
+          - type: remaining_parent_state
+            children:
+              - network
+            entity_id: total_nonrenewable
+            name: Non-Renewable
+            color: grey
+          - type: remaining_parent_state
+            children:
+              - network
+            entity_id: total_other
+            name: Other
+          - type: entity
+            children:
+              - network
+            entity_id: sensor.nem_tas_import
+            name: Import
+      - entities:
+          - type: remaining_parent_state
+            children:
+              - sensor.nem_tas_demand
+              - sensor.nem_tas_export
+              - demand_other
+            entity_id: network
+            name: Network
+      - entities:
+          - type: entity
+            children: []
+            entity_id: sensor.nem_tas_demand
+            name: Demand
+          - type: entity
+            children: []
+            entity_id: sensor.nem_tas_export
+            name: Export
+          - type: remaining_parent_state
+            children: []
+            entity_id: demand_other
+            name: Other
+    title: Tasmania
+    wide: true
+    type: custom:sankey-chart
+    show_names: true
+    min_state: 0
